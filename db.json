@@ -1,0 +1,12 @@
+{
+  "books": [
+    {
+      "title": "Jane Eyre",
+      "description": "The narrative is in the first person, the action takes place somewhere in the northern part of England at the end of the reign of George III . Jane Eyre 's parents died when she was very young, and she was taken in by her mother's brother, Mr. Reed, who also died soon after.",
+      "author": "Sharlot Bronte",
+      "year": 1687,
+      "category": "Romance",
+      "id": 1
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+<div class="container p-3">
+  <div class="row">
+    <div class="col-8">
+      <h3>Books | {{ books.length }} </h3>
+    </div>
+    <div class="text-end col-4">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Add new</button>
+    </div>
+  </div>
+
+
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Author</th>
+      <th scope="col">Year</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of books; index as i">
+      <th scope="row">{{ book.id }}</th>
+      <td>{{ book.title }}</td>
+      <td>{{ book.description | slice: 0 : 50 }}...</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.year }}</td>
+      <td>
+        <button class="btn btn-success btn-sm" type="button" (click)="edit(book)" data-bs-toggle="modal" data-bs-target="#addModal">Edit</button>
+        <button class="btn btn-danger btn-sm mx-3" type="button" (click)="delete(book)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="bookForm" (ngSubmit)="submit()">
+        <div class="modal-body">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" formControlName="title">
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="description" formControlName="description" ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="author" class="form-label">Author</label>
+              <input type="text" class="form-control" id="author" formControlName="author">
+            </div>
+            <div class="mb-3">
+              <label for="year" class="form-label">Year</label>
+              <input type="number" class="form-control" id="year" formControlName="year">
+            </div>
+            <div class="mb-3">
+              <label for="year" class="form-label">Category</label>
+              <select class="form-select" formControlName="category">
+                <option *ngFor="let category of categories"  [value]="category">{{ category }}</option>
+              </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit"
+                  class="btn btn-primary"
+                  [disabled]="bookForm.invalid"
+                  [ngClass]="{'not-allowed': bookForm.invalid}"
+                  data-bs-dismiss="modal"
+          >Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
